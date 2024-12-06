@@ -45,10 +45,8 @@
       vim-cpp-enhanced-highlight
       gruvbox
       fzf-vim
-     ];
-     settings = { 
-     };
-     extraConfig = builtins.readFile ./vimrc;
+    ];
+    extraConfig = builtins.readFile ./vimrc;
   };
 
   home.file = {
@@ -57,7 +55,6 @@
   home.sessionVariables = {
     EDITOR = "vim";
   };
-
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 }

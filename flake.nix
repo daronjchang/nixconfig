@@ -15,22 +15,16 @@
 
   outputs = { self, nix-ld, nixpkgs, home-manager, ... }@inputs: {
     nixosConfigurations = {
-      #nixos host
       nixos = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
           ./configuration.nix
           nix-ld.nixosModules.nix-ld
-          #{
-          #  programs.nixosModules.nix-ld.dev.enable = true;
-          #}
-
-          home-manager.nixosModules.home-manager
-          {
+          home-manager.nixosModules.home-manager {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.users.cdaron = ./home.nix;
-	  }
+	        }
         ];
       };
     };
