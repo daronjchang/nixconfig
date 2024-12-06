@@ -23,7 +23,14 @@
       fsType = "vfat";
       options = [ "fmask=0022" "dmask=0022" ];
     };
-
+  # Mount nix config
+  fileSystems."/etc/nixos" =
+  {
+    depends = [ "/" ];
+    device = "/home/cdaron/nixconfig";
+    fsType = "none";
+    options = ["bind"];
+  };
   swapDevices = [ ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
