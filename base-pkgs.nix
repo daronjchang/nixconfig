@@ -1,11 +1,11 @@
-{pkgs ...}:
+{pkgs, ...}:
 {
   fonts.packages = with pkgs; [
     noto-fonts
-    noto-fonts-cjk
+    noto-fonts-cjk-sans
   ];
 
-  environtment.systemPacakges = with pkgs; [
+  environment.systemPackages = with pkgs; [
     wget
     curl
     kitty
@@ -13,7 +13,7 @@
     home-manager
     gparted
     ripgrep
-    demnu
+    dmenu
     vscode
     pavucontrol
     pciutils

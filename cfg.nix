@@ -45,26 +45,6 @@
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-
-  environment.systemPackages = with pkgs; [
-    wget
-    git
-    binutils
-    curl
-    which
-    home-manager
-    gparted
-    pavucontrol
-    dmenu
-    neofetch
-    shutter
-    polybar
-    ripgrep
-    pavucontrol
-    kitty
-    picom
-    feh
-  ];
   system.stateVersion = "24.11";
 
 }

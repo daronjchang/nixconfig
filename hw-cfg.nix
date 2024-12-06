@@ -27,7 +27,7 @@
   fileSystems."/etc/nixos" =
   {
     depends = [ "/" ];
-    device = "/home/cdaron/nixconfig";
+    device = "/home/cdaron/nixcfg";
     fsType = "none";
     options = ["bind"];
   };
