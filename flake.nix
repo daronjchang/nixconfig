@@ -29,13 +29,7 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-	    #home-manager.users.nixos = ./home/cdaron/home.nix;
-	    home-manager.users.cdaron = { pkgs, ... }: {
-            home.username = "cdaron";
-              home.homeDirectory = "/home/cdaron";
-              programs.home-manager.enable = true;
-              home.stateVersion = "24.11";
-            };
+            home-manager.users.cdaron = ./home.nix;
 	  }
         ];
       };

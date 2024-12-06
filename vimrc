@@ -2,35 +2,8 @@
 filetype plugin indent on
 syntax on
 
-
-" ################################################
-"                Plugin Installation
-" ################################################
-
-" Enable plugins using vim-plug
-call plug#begin()
-
-" Install fzf, a fuzzy finder plugin for vim
-Plug 'junegunn/fzf'
-
-" Install extra scripts for fzf
-Plug 'junegunn/fzf.vim'
-
-" Install gruvbox theme
-Plug 'morhetz/gruvbox', { 'as': 'gruvbox' }
-
-" Install vim-cpp-modern for better syntax highlighting
-Plug 'bfrg/vim-cpp-modern'
-
-" Add airline
-Plug 'vim-airline/vim-airline'
-
-" Install fugitive
-Plug 'tpope/vim-fugitive'
-
 " Initialize plugin system
 " - Automatically executes `filetype plugin indent on` and `syntax enable`.
-call plug#end()
 
 " ################################################
 "                Extension settings

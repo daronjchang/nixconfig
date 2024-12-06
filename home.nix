@@ -40,9 +40,15 @@
   };
   programs.vim = {
     enable = true;
-    plugins = with pkgs.vimPlugins; [ vim-airline
+    plugins = with pkgs.vimPlugins; [ 
+      vim-airline
+      vim-cpp-enhanced-highlight
+      gruvbox
+      fzf-vim
      ];
-    settings = { ignorecase = true; };
+     settings = { 
+     };
+     extraConfig = builtins.readFile ./vimrc;
   };
 
   home.file = {
