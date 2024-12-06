@@ -7,7 +7,7 @@
 {
   imports =
   [
-    ./hardware-configuration.nix
+    ./hw-cfg.nix
   ];
   nixpkgs.config.allowUnfree = true;
   boot.loader.systemd-boot.enable = true;
@@ -18,7 +18,7 @@
   networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
   networking.useDHCP = false;
   networking.interfaces.eno1.useDHCP = true;
-   
+
   time.timeZone = "America/Chicago";
 
   services.xserver.enable = true;
@@ -44,7 +44,7 @@
   services.tailscale.enable = true;
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  
+
 
   environment.systemPackages = with pkgs; [
     wget
@@ -57,7 +57,7 @@
     pavucontrol
     dmenu
     neofetch
-    shutter 
+    shutter
     polybar
     ripgrep
     pavucontrol
@@ -65,7 +65,7 @@
     picom
     feh
   ];
-  system.stateVersion = "24.11"; 
+  system.stateVersion = "24.11";
 
 }
 
