@@ -6,7 +6,12 @@
 
   home.stateVersion = "24.11"; # Please read the comment before changing.
   home.enableNixpkgsReleaseCheck = false;
-
+  imports = [ ./hyprland-cfg.nix ]
+  wayland.windowManager.hyprland = {
+    enable = true;
+    package = pkgs.hyprland;
+    xwayland.enabnle = true;
+  }
   nixpkgs.config.allowUnfree = true;
   home.packages = with pkgs; [
     hello

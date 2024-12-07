@@ -1,8 +1,25 @@
-{pkgs, ...}: {
-  programs.hyperland = {
+{
+  pkgs,
+  lib,
+  username,
+  host,
+  config,
+  ...
+}:
+
+let
+  inherit (import ../hosts/${host}/variables.nix)
+    browser
+    terminal
+    extraMonitorSettings
+    keyboardLayout
+    ;
+in
+with lib;
+{
+   wayland.windowManager.hyprland = {
     enable = true;
-    package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-    # make sure to also set the portal package, so that they are in sync
-    portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland
+    package = pkgs.hyprland;
+    xwayland.enabnle = true;
   }
 }
