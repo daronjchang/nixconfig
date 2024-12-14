@@ -11,20 +11,37 @@
 
     nix-ld.url = "github:Mic92/nix-ld";
     nix-ld.inputs.nixpkgs.follows = "nixpkgs";
+    hyprland.url = "github:hyprwm/Hyprland";
+    hyprland-plugins = {
+      url = "github:hyprwm/hyprland-plugins";
+      inputs.hyprland.follows = "hyprland";
+    };
+    hyprpaper.url = "github:hyprwm/hyprpaper";
+    hyprlock.url = "github:hyprwm/hyprlock";
   };
 
-  outputs = { self, nix-ld, nixpkgs, home-manager, ... }@inputs: {
+  outputs = {
+    self,
+    nix-ld,
+    nixpkgs,
+    home-manager,
+    hyprland,
+    hyprlock,
+    hyprpaper,
+     ...
+    }@inputs: {
     nixosConfigurations = {
       nixos = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
           ./cfg.nix
           ./base-pkgs.nix
+          ./users.nix
           nix-ld.nixosModules.nix-ld
           home-manager.nixosModules.home-manager {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.cdaron = ./home.nix;
+            home-manager.users.cdaron = ./homemanager/home.nix;
 	        }
         ];
       };

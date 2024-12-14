@@ -1,30 +1,21 @@
 {pkgs, ...}:
 {
     home.packages = with pkgs; [
-        (writeShellScriptBin "start-desktop-chats" ''
-            google-chrome-stable --app=https://messenger.com/ &
-            google-chrome-stable --app=https://web.whatsapp.com/ &
-        '')
-        (writeShellScriptBin "kill-desktop-chats" ''
-            killall chrome
-        '')
-        grim
-        slurp
         fuzzel
+        waybar
+        hyprshot
+        hyprcursor
+        hyprlock
+        hypridle
+        hyprpaper
     ];
-
-    services.wlsunset = {
-        enable = true;
-        latitude = 30.3;
-        longitude = -97.7;
-    };
 
     wayland.windowManager.hyprland = {
         enable = true;
         systemd.enable = true;
         xwayland.enable = true;
         settings = let
-            mainMod = "ALT";
+            mainMod = "SUPER";
         in {
             xwayland = {
                 force_zero_scaling = true;
@@ -35,24 +26,22 @@
                 "wl-paste --watch cliphist store"
                 #bar
                 "waybar"
-                "start-desktop-chats"
+                "spotify"
+                "signal"
+                "discord-canary"
             ];
 
             "windowrulev2" = [
                 # "suppressevent maximize, class:.*"
                 "workspace special:Signal silent,class:^(signal)$"
                 "workspace special:Signal silent,class:^(Signal)$"
-                "workspace special:Messenger silent,class:^(chrome[-]messenger[.]com[_][_][-]Default)$"
-                "workspace special:Messenger silent,initialTitle:messenger[.]com.*"
-                "workspace special:Whatsapp silent,class:^(chrome[-]web[.]whatsapp[.]com[_][_][-]Default)$"
-                "workspace special:Whatsapp silent,initialTitle:web[.]whatsapp[.]com.*"
+                "workspace special:Discord silent,class:^(discord)$"
                 "workspace special:Spotify silent,class:^(spotify)$"
             ];
 
             general = {
                 gaps_in = 5;
                 gaps_out = 10;
-
                 border_size = 2;
 
                 # https://wiki.hyprland.org/Configuring/Variables/#variable-types for info about colors
@@ -75,17 +64,17 @@
                 active_opacity = 1.0;
                 inactive_opacity = 1.0;
 
-                drop_shadow = true;
-                shadow_range = 4;
-                shadow_render_power = 3;
-                "col.shadow" = "rgba(1a1a1aee)";
+                #drop_shadow = true;
+                #shadow_range = 4;
+                #shadow_render_power = 3;
+                #"col.shadow" = "rgba(1a1a1aee)";
 
                 # https://wiki.hyprland.org/Configuring/Variables/#blur
                 blur = {
                     enabled = true;
                     size = 3;
                     passes = 1;
-                    
+
                     vibrancy = 0.1696;
                 };
             };
@@ -120,14 +109,14 @@
                 pass_mouse_when_bound = true;
             };
             # https://wiki.hyprland.org/Configuring/Variables/#misc
-            misc = { 
+            misc = {
                 force_default_wallpaper = 2; # Set to 0 or 1 to disable the anime mascot wallpapers
                 disable_hyprland_logo = false; # If true disables the random hyprland logo / anime girl background. :(
             };
 
             # https://wiki.hyprland.org/Configuring/Variables/#input
             input = {
-                kb_layout = "us,gr,ru";
+                kb_layout = "us";
                 kb_options = "grp:caps_toggle";
 
                 follow_mouse = 1;
@@ -147,31 +136,30 @@
             };
 
             bind = [
-                "${mainMod}, SPACE, exec, cliphist list | fuzzel -d  | cliphist decode | wl-copy"
+                #"${mainMod}, SPACE, exec, cliphist list | fuzzel -d  | cliphist decode | wl-copy"
                 "${mainMod}, F, fullscreen, 2"
-                "${mainMod}, ENTER, exec, kitty"
+                "${mainMod}, RETURN, exec, kitty"
                 "${mainMod}, Q, killactive,"
                 "${mainMod}, M, exit,"
+                "${mainMod}, H, movewindow, l"
+                "${mainMod}, J, movewindow, d,"
+                "${mainMod}, K, movewindow, u"
+                "${mainMod}, L, movewindow, r"
                 "${mainMod}, V, togglefloating,"
-                "${mainMod}, R, exec, fuzzel"
                 "${mainMod}, P, pseudo, # dwindle"
-                "${mainMod}, J, togglesplit, # dwindle"
-                "${mainMod}, B, exec, google-chrome-stable # dwindle"
-                "${mainMod}, D, exec, code --enable-features=UseOzonePlatform --ozone-platform=wayland"
+                "${mainMod}, S, togglesplit, # dwindle"
+                "${mainMod}, D, exec, fuzzel"
+                "${mainMod}, C, exec, code --enable-features=UseOzonePlatform --ozone-platform=wayland"
                 "${mainMod}, left, movefocus, l"
                 "${mainMod}, right, movefocus, r"
                 "${mainMod}, up, movefocus, u"
                 "${mainMod}, down, movefocus, d"
                 "${mainMod}, mouse_down, workspace, e+1"
                 "${mainMod}, mouse_up, workspace, e-1"
-                "${mainMod} SHIFT, E, exec, fuzzel -d | xargs -n 1 -I % echo \"slurp | grim -g - %\" | sh "
-                "${mainMod} SHIFT, D, exec, fuzzel -d | xargs -n 1 grim"
-                "${mainMod} SHIFT, R, exec, slurp | grim -g - - | wl-copy"
-                "${mainMod} SHIFT, F, exec, grim - | wl-copy"
-                "${mainMod} SHIFT, Q, togglespecialworkspace, Signal"
-                "${mainMod} SHIFT, A, togglespecialworkspace, Messenger"
-                "${mainMod} SHIFT, W, togglespecialworkspace, Whatsapp"
+                "${mainMod} SHIFT, R, exec, hyprshot -m region --clipboard-only"
+                "${mainMod} SHIFT, A, togglespecialworkspace, Signal"
                 "${mainMod} SHIFT, S, togglespecialworkspace, Spotify"
+                "${mainMod} SHIFT, W, togglespecialworkspace, Discord"
                 ",XF86AudioMute,exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
             ] ++ (
                 # workspaces

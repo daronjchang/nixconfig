@@ -1,25 +1,23 @@
-{lib, 
-...}:
+{ lib,
+  ...}:
 {
-    
     home-manager.useGlobalPkgs = true;
-    home-manager.backupFileExtension = "mback";
+    home-manager.backupFileExtension = "hm.bk";
     home-manager.useUserPackages = true;
 
-    # home-manager imports
-    # handle sub-directories
-    home-manager.users.cdaron = ({...}:{
-        imports = let 
-            dirC = (builtins.readDir ./homemanager);
-            mappedList = builtins.map (x: {
-                name = x;
-                type = (builtins.getAttr x dirC);
-            }) (builtins.attrNames dirC);
-            filteredList = builtins.filter 
-                (x: x.name != "creds.nix" && x.type != "directory" )
-                mappedList;
-            allImps = builtins.map
-                (x: (import ./homemanager/${x.name}))
-                filteredList;   
-    });
+    # home-manager user config for 'bob'
+    home-manager.users.cdaron = { ... }: let
+        # Read the directory contents
+        dirContents = builtins.readDir ./homemanager;
+
+        # Filter out "creds.nix" and non-files (directories)
+        filteredFiles = builtins.filter
+            (name: name != "creds.nix" && dirContents.${name} == "regular")
+            (builtins.attrNames dirContents);
+
+        # Import all valid files
+        allImports = builtins.map (name: import ./homemanager/${name}) filteredFiles;
+    in {
+        imports = allImports;
+    };
 }

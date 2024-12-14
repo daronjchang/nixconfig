@@ -6,12 +6,7 @@
 
   home.stateVersion = "24.11"; # Please read the comment before changing.
   home.enableNixpkgsReleaseCheck = false;
-  imports = [ ./hyprland-cfg.nix ]
-  wayland.windowManager.hyprland = {
-    enable = true;
-    package = pkgs.hyprland;
-    xwayland.enabnle = true;
-  }
+
   nixpkgs.config.allowUnfree = true;
   home.packages = with pkgs; [
     hello
@@ -33,10 +28,12 @@
     qemu
     strace
     steam
-    discord
+    discord-canary
     spotify
     signal-desktop
     libreoffice
+    bemenu
+    fastfetch
   ];
   programs.git = {
     enable = true;
@@ -45,13 +42,13 @@
   };
   programs.vim = {
     enable = true;
-    plugins = with pkgs.vimPlugins; [ 
+    plugins = with pkgs.vimPlugins; [
       vim-airline
       vim-cpp-enhanced-highlight
       gruvbox
       fzf-vim
     ];
-    extraConfig = builtins.readFile ./vimrc;
+    extraConfig = builtins.readFile ./dotfiles/vimrc;
   };
 
   home.file = {

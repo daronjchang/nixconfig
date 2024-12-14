@@ -20,16 +20,44 @@
   networking.interfaces.eno1.useDHCP = true;
 
   time.timeZone = "America/Chicago";
-
+#
   services.xserver.enable = true;
-  services.xserver.xkb.layout = "us";
   services.xserver.videoDrivers = [ "amdgpu" ];
-  services.xserver.windowManager.i3.enable = true;
+  services.greetd = {
+    enable = true;
+    settings = rec {
+        initial_session = {
+          command = "${pkgs.hyprland}/bin/Hyprland";
+          user = "cdaron";
+        };
+        default_session = initial_session;
+      };
+    };
+  programs.hyprland = {
+    enable = true;
+    xwayland.enable = true;
+  };
+
+  xdg = {
+    autostart.enable = true;
+    portal = {
+      enable = true;
+      extraPortals = [
+        pkgs.xdg-desktop-portal
+        pkgs.xdg-desktop-portal-gtk
+      ];
+    };
+  };
+
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
   services.printing.enable = true;
   services.openssh.enable = true;
   services.pipewire = {
      enable = true;
      pulse.enable = true;
+     alsa.enable = true;
+     alsa.support32Bit = true;
+
   };
 
   users.users.cdaron = {
@@ -38,14 +66,16 @@
     packages = with pkgs; [
       tree
     ];
+    shell = pkgs.zsh;
   };
-
+  programs.zsh.enable = true;
   programs.firefox.enable = true;
   services.tailscale.enable = true;
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   system.stateVersion = "24.11";
+  environment.loginShellInit = ''[[ "$(tty)" == /dev/tty1 ]] && dbus-run-session hyprland'';
 
 }
 

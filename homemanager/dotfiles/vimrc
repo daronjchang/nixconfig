@@ -55,7 +55,7 @@ function! CreateTerm()
 	execute "set nobuflisted"
 endfunction
 
-command Term call CreateTerm()
+command! Term call CreateTerm()
 
 " Enable whitespace stripping by default
 let g:EnableWStrip = 1
@@ -81,8 +81,8 @@ endfunction
 " Run whitespace strip function before buffer write
 autocmd BufWritePre * call TrimWhiteSpace()
 
-command EnableWStrip let g:EnableWStrip=1
-command DisableWStrip let g:EnableWStrip=0
+command! EnableWStrip let g:EnableWStrip=1
+command! DisableWStrip let g:EnableWStrip=0
 
 " Set the width of a tab. Useful when editing files
 " Where the filetype plugin selects the wrong indentation standard
@@ -99,7 +99,7 @@ function! SetTabWidth(num)
 	endif
 endfunction
 
-command -nargs=1 TabSpacing call SetTabWidth(<f-args>)
+command! -nargs=1 TabSpacing call SetTabWidth(<f-args>)
 " Default tab width "
 set tabstop=2
 set shiftwidth=2
