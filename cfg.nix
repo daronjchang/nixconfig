@@ -52,11 +52,17 @@
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
   services.printing.enable = true;
   services.openssh.enable = true;
+  security.rtkit.enable = true;
   services.pipewire = {
-     enable = true;
-     pulse.enable = true;
-     alsa.enable = true;
-     alsa.support32Bit = true;
+    enable = true;
+    audio.enable = true;
+    pulse.enable = true;
+    alsa = {
+      enable = true;
+      support32Bit = true;
+    };
+    jack.enable = true;
+    wireplumber.enable = true;
 
   };
 
@@ -66,9 +72,7 @@
     packages = with pkgs; [
       tree
     ];
-    shell = pkgs.zsh;
   };
-  programs.zsh.enable = true;
   programs.firefox.enable = true;
   services.tailscale.enable = true;
 
@@ -78,4 +82,3 @@
   environment.loginShellInit = ''[[ "$(tty)" == /dev/tty1 ]] && dbus-run-session hyprland'';
 
 }
-

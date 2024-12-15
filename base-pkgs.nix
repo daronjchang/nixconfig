@@ -13,22 +13,22 @@
     kitty
     which
     home-manager
-    gparted
     ripgrep
-    dmenu
     vscode
-    pavucontrol
+
+    gparted
+    usbutils
     pciutils
+
+    alsa-utils
+    pwvucontrol
+    pavucontrol
     qemu
     neofetch
-    shutter
-    polybar
-    picom
-    feh
     (writeShellScriptBin "nxrb" ''
       sudo nixos-rebuild switch --flake /etc/nixos/#nixos
       '')
-    
+
     (writeShellScriptBin "nxrbr" ''
       sudo nixos-rebuild switch --show-trace --verbose --flake /etc/nixos/#nixos
       '')

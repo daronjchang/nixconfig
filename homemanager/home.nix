@@ -34,6 +34,12 @@
     libreoffice
     bemenu
     fastfetch
+    (writeShellScriptBin "sctlu" ''
+      systemctl --user status "$1"
+      '')
+    (writeShellScriptBin "sctlur" ''
+      systemctl restart --user status "$1"
+      '')
   ];
   programs.git = {
     enable = true;

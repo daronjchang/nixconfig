@@ -24,11 +24,11 @@
                 # regular copy-paste
                 "wl-clipboard-history -t"
                 "wl-paste --watch cliphist store"
-                #bar
+                "hyperpaper"
                 "waybar"
                 "spotify"
                 "signal"
-                "discord-canary"
+                "DiscordCanary"
             ];
 
             "windowrulev2" = [
