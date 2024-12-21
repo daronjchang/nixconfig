@@ -16,7 +16,10 @@
       url = "github:hyprwm/hyprland-plugins";
       inputs.hyprland.follows = "hyprland";
     };
-    hyprpaper.url = "github:hyprwm/hyprpaper";
+    hyprpaper = {
+      url ="github:hyprwm/hyprpaper";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     hyprlock.url = "github:hyprwm/hyprlock";
   };
 

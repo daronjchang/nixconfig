@@ -22,7 +22,6 @@
 
     alsa-utils
     pwvucontrol
-    pavucontrol
     qemu
     neofetch
     (writeShellScriptBin "nxrb" ''

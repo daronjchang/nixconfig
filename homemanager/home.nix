@@ -34,6 +34,9 @@
     libreoffice
     bemenu
     fastfetch
+    vulkan-tools
+    steam
+    cmake
     (writeShellScriptBin "sctlu" ''
       systemctl --user status "$1"
       '')
