@@ -37,6 +37,7 @@
     vulkan-tools
     steam
     cmake
+    bambu-studio
     (writeShellScriptBin "sctlu" ''
       systemctl --user status "$1"
       '')

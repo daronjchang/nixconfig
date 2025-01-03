@@ -13,7 +13,7 @@
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
   boot.kernelParams = [
-    "video=card1-HDMI-A-1:3840:1600@59.96"
+    #"video=card1-HDMI-A-1:3840:1600@59.96"
   ];
 
   fileSystems."/" =

@@ -15,7 +15,7 @@
     home-manager
     ripgrep
     vscode
-
+    ddcutil
     gparted
     usbutils
     pciutils
@@ -24,6 +24,7 @@
     pwvucontrol
     qemu
     neofetch
+    nixpkgs-fmt
     (writeShellScriptBin "nxrb" ''
       sudo nixos-rebuild switch --flake /etc/nixos/#nixos
       '')

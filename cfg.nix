@@ -26,12 +26,12 @@
   services.greetd = {
     enable = true;
     settings = rec {
-        initial_session = {
-          command = "${pkgs.hyprland}/bin/Hyprland";
-          user = "cdaron";
-        };
-        default_session = initial_session;
+      initial_session = {
+        command = "${pkgs.hyprland}/bin/Hyprland";
+        user = "cdaron";
       };
+      default_session = initial_session;
+    };
     };
   programs.hyprland = {
     enable = true;
