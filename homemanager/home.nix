@@ -7,7 +7,6 @@
   home.stateVersion = "24.11"; # Please read the comment before changing.
   home.enableNixpkgsReleaseCheck = false;
 
-  nixpkgs.config.allowUnfree = true;
   home.packages = with pkgs; [
     hello
     gcc
@@ -38,6 +37,10 @@
     steam
     cmake
     bambu-studio
+    feh
+    vlc
+    direnv
+    nix-direnv
     (writeShellScriptBin "sctlu" ''
       systemctl --user status "$1"
       '')
@@ -45,6 +48,10 @@
       systemctl restart --user status "$1"
       '')
   ];
+  programs.direnv = {
+      enable = true;
+      nix-direnv.enable = true;
+    };
   programs.git = {
     enable = true;
     userName = "daronjchang";
@@ -59,6 +66,11 @@
       fzf-vim
     ];
     extraConfig = builtins.readFile ./dotfiles/vimrc;
+  };
+
+  nixpkgs.config = {
+      allowUnfree = true;
+      allowUnfreePredicate = (_: true);
   };
 
   home.file = {

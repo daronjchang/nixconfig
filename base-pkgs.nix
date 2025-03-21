@@ -19,9 +19,11 @@
     gparted
     usbutils
     pciutils
-
+    mullvad-vpn
+    dig #Domain Name Server
     alsa-utils
     pwvucontrol
+    helvum
     qemu
     neofetch
     nixpkgs-fmt

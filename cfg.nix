@@ -9,7 +9,10 @@
   [
     ./hw-cfg.nix
   ];
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs.config = {
+    allowUnfree = true;
+    allowUnfreePredicate = (_: true);
+  };
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelPackages = pkgs.linuxPackages_latest;
@@ -65,16 +68,32 @@
     wireplumber.enable = true;
 
   };
-
   users.users.cdaron = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" "home-manager" "docker" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" "networkmanager" "home-manager" "docker" "audio" "dialout" "plugdev"]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [
       tree
     ];
   };
   programs.firefox.enable = true;
   services.tailscale.enable = true;
+  virtualisation.docker.enable = true;
+  virtualisation.docker.rootless = {
+    enable = true;
+    setSocketVariable = true;
+  };
+  services.udev.extraRules = ''
+    # STM32 USB devices (adjust IDs as needed)
+    SUBSYSTEM=="usb", ATTR{idVendor}=="0483", ATTR{idProduct}=="3748", MODE="0666"
+    SUBSYSTEM=="usb", ATTR{idVendor}=="0483", ATTR{idProduct}=="df11", MODE="0666"
+    SUBSYSTEM=="usb", ATTR{idVendor}=="0483", ATTR{idProduct}=="374e", MODE="0666"
+  '';
+
+  # Add user to plugdev group for USB access
+  users.groups.plugdev = {};  # Define plugdev group if not already there
+
+  services.mullvad-vpn.enable = true;
+  services.resolved.enable = true;
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 

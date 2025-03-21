@@ -30,6 +30,7 @@
 					"spotify"
 					"signal-desktop"
 					"DiscordCanary"
+					"mullvad-vpn"
 				];
 
 				"windowrulev2" = [
@@ -38,6 +39,7 @@
 					"workspace special:Signal silent,class:^(Signal)$"
 					"workspace special:Discord silent,class:^(discord)$"
 					"workspace special:Spotify silent,class:^(spotify)$"
+					"workspace special:CONF silent,class:^(mullvad-vpn)$"
 				];
 
 				general = {
@@ -48,7 +50,6 @@
 					# https://wiki.hyprland.org/Configuring/Variables/#variable-types for info about colors
 					"col.active_border" = "rgba(33ccffee) rgba(00ff99ee) 45deg";
 					"col.inactive_border" = "rgba(595959aa)";
-
 					# Set to true enable resizing windows by clicking and dragging on borders and gaps
 					resize_on_border = false;
 
@@ -113,6 +114,7 @@
 				misc = {
 					force_default_wallpaper = 2; # Set to 0 or 1 to disable the anime mascot wallpapers
 					disable_hyprland_logo = false; # If true disables the random hyprland logo / anime girl background. :(
+					disable_splash_rendering = true;
 				};
 
 				# https://wiki.hyprland.org/Configuring/Variables/#input
@@ -161,6 +163,7 @@
 					"${mainMod} SHIFT, A, togglespecialworkspace, Signal"
 					"${mainMod} SHIFT, S, togglespecialworkspace, Spotify"
 					"${mainMod} SHIFT, W, togglespecialworkspace, Discord"
+					"${mainMod} SHIFT, D, togglespecialworkspace, CONF"
 					",XF86AudioMute,exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
 				] ++ (
 					# workspaces
