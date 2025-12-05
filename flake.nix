@@ -41,11 +41,13 @@
           ./base-pkgs.nix
           ./users.nix
           nix-ld.nixosModules.nix-ld
-          home-manager.nixosModules.home-manager {
+          home-manager.nixosModules.home-manager 
+          {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.users.cdaron = ./homemanager/home.nix;
 	        }
+
         ];
       };
     };

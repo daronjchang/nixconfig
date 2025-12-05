@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, nixpkgs, ... }:
 
 {
   home.username = "cdaron";
@@ -15,7 +15,7 @@
     pciutils
     rustc
     cargo
-    python39
+    python314
     poetry
     conda
     go
